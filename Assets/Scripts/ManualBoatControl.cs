@@ -9,15 +9,16 @@ public sealed class ManualBoatControl : MonoBehaviour
 
     private void Awake() => _rb = GetComponent<Rigidbody>();
 
-    private void Update()
+    private void FixedUpdate()
     {
         var move = InputSystem.actions["Move"].ReadValue<Vector2>();
         if (move.y != 0)
-            _rb.AddRelativeForce((move.y < 0 ? Vector3.back : Vector3.forward) * 5);
+            _rb.AddRelativeForce((move.y < 0 ? Vector3.back : Vector3.forward), ForceMode.Acceleration);
+        _rb.maxLinearVelocity = 1;
         if (move.x < 0)
-            _rb.AddRelativeTorque(0, -3, 0);
+            _rb.AddTorque(0, -1, 0, ForceMode.Acceleration);
         else if (move.x > 0)
-            _rb.AddRelativeTorque(0, 3, 0);
+            _rb.AddTorque(0, 1, 0, ForceMode.Acceleration);
     }
 
 }
