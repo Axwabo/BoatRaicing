@@ -24,7 +24,11 @@ namespace Maps
         [SerializeField]
         private CutsceneSequence[] cutscenes;
 
-        private void Start() => TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
+        private void Start()
+        {
+            ManualBoatControl.Current.enabled = false;
+            TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
+        }
 
         private void Update()
         {
@@ -41,6 +45,7 @@ namespace Maps
 
                     _phase = Phase.Waiting;
                     _delay += Waiting;
+                    ManualBoatControl.Current.Mount(cam);
                     break;
                 case Phase.Cutscenes:
                     var sequence = cutscenes[_index];
@@ -56,6 +61,7 @@ namespace Maps
                     _delay += Countdown;
                     break;
                 case Phase.CountingDown when _delay <= 0:
+                    ManualBoatControl.Current.enabled = true;
                     Destroy(this);
                     break;
             }

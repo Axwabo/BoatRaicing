@@ -21,6 +21,9 @@ public sealed class Boat : MonoBehaviour
 
     private float _leftAngle;
 
+    [field: SerializeField]
+    public MeshRenderer Player { get; private set; }
+
     [SerializeField]
     private float force = 1;
 
