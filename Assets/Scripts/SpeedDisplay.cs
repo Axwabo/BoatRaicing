@@ -11,6 +11,6 @@ public sealed class SpeedDisplay : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
-    private void Update() => text.text = $"{rb.linearVelocity.magnitude:F} m/s";
+    private void Update() => text.text = $"{rb.linearVelocity.MagnitudeIgnoreY():F} m/s";
 
 }
