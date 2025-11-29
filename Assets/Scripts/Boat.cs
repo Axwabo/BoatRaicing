@@ -85,14 +85,14 @@ public sealed class Boat : MonoBehaviour
     {
         if (sideways != 0)
             return;
-        var rightMod = _rightTarget % CircumferenceModulus;
-        var leftMod = _leftTarget % CircumferenceModulus;
-        if (Mathf.Abs(rightMod - leftMod) is < 1 or > CircumferenceModulus - 1)
+        var difference = _leftTarget - _rightTarget;
+        var mod = Mathf.Abs(difference) % CircumferenceModulus;
+        if (mod is < 1 or > CircumferenceModulus - 1)
             return;
         if (Random.value < 0.5f)
-            _rightTarget += (_leftTarget - _rightTarget) % CircumferenceModulus * forwards;
+            _leftTarget += mod * forwards;
         else
-            _leftTarget += (_rightTarget - _leftTarget) % CircumferenceModulus * forwards;
+            _rightTarget += mod * forwards;
     }
 
     private void Update()
