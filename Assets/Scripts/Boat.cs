@@ -9,6 +9,14 @@ public sealed class Boat : MonoBehaviour
 
     private Transform _t;
 
+    private float _rightTarget;
+
+    private float _rightAngle;
+
+    private float _leftTarget;
+
+    private float _leftAngle;
+
     [SerializeField]
     private float force = 1;
 
@@ -24,6 +32,12 @@ public sealed class Boat : MonoBehaviour
     [SerializeField]
     private float decelerationRatio = 0.3f;
 
+    [SerializeField]
+    private Transform rightOar;
+
+    [SerializeField]
+    private Transform leftOar;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -35,14 +49,39 @@ public sealed class Boat : MonoBehaviour
         var forwards = Math.Sign(move.y);
         var sideways = Math.Sign(move.x);
         if (sideways != 0)
-            _rb.AddTorque(0, sideways * torque * Time.fixedDeltaTime, 0);
+            Turn(sideways);
         if (forwards == 0)
             return;
+        _rightTarget += forwards * 0.5f;
+        _leftTarget += forwards * 0.5f;
         var linear = _rb.linearVelocity;
         var multiplier = Math.Sign(_t.InverseTransformDirection(linear).z) == forwards
             ? Mathf.Min(1, linear.MagnitudeIgnoreY() / accelerationMultiplierTarget) * accelerationMultiplierRatio + 1
             : decelerationRatio;
         _rb.AddRelativeForce(0, 0, forwards * force * multiplier * Time.fixedDeltaTime);
+    }
+
+    private void Turn(int sideways)
+    {
+        _rb.AddTorque(0, sideways * torque * Time.fixedDeltaTime, 0);
+        if (sideways < 0)
+        {
+            _rightTarget++;
+            _leftTarget--;
+        }
+        else
+        {
+            _leftTarget++;
+            _rightTarget--;
+        }
+    }
+
+    private void Update()
+    {
+        _rightAngle = Mathf.Lerp(_rightAngle, _rightTarget, Time.deltaTime * 3);
+        _leftAngle = Mathf.Lerp(_leftAngle, _leftTarget, Time.deltaTime * 3);
+        rightOar.localEulerAngles = new Vector3(_rightAngle * 10, 0, 0);
+        leftOar.localEulerAngles = new Vector3(_leftAngle * 10, 0, 0);
     }
 
 }
