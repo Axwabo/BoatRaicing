@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa94f55f24e4dcda57961e436950c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boat
-  force: 50
-  torque: 30
+  force: 100
+  torque: 20
 --- !u!1 &3751570053163389233
 GameObject:
   m_ObjectHideFlags: 0
