@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public sealed class Boat : MonoBehaviour
@@ -6,16 +7,22 @@ public sealed class Boat : MonoBehaviour
 
     private Rigidbody _rb;
 
+    [SerializeField]
+    private float force = 1;
+
+    [SerializeField]
+    private float torque = 1;
+
     private void Awake() => _rb = GetComponent<Rigidbody>();
 
-    public void Row(bool forwards, bool backwards, bool left, bool right)
+    public void Row(Vector2 move)
     {
-        if (forwards && backwards && left && right)
-            return;
-        Debug.Log($"{forwards} {backwards} {left} {right}");
-        var leftAmount = left ? 1 : 0;
-        var rightAmount = right ? 1 : 0;
-        // TODO
+        var forwards = Math.Sign(move.y);
+        var sideways = Math.Sign(move.x);
+        if (forwards != 0)
+            _rb.AddRelativeForce(0, 0, forwards * force * Time.fixedDeltaTime);
+        if (sideways != 0)
+            _rb.AddTorque(0, sideways * torque * Time.fixedDeltaTime, 0);
     }
 
 }
