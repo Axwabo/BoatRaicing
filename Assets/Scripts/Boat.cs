@@ -25,4 +25,6 @@ public sealed class Boat : MonoBehaviour
             _rb.AddTorque(0, sideways * torque * Time.fixedDeltaTime, 0);
     }
 
+    public void Jump() => _rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+
 }
