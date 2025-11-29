@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Maps
 {
@@ -46,13 +47,7 @@ namespace Maps
                     ManualBoatControl.Current.Mount(cam);
                     break;
                 case Phase.Cutscenes:
-                    var sequence = cutscenes[_index];
-                    sequence.from.GetPositionAndRotation(out var fromPos, out var fromRot);
-                    sequence.to.GetPositionAndRotation(out var toPos, out var toRot);
-                    cam.SetPositionAndRotation(
-                        Vector3.Lerp(toPos, fromPos, _delay / sequence.duration),
-                        Quaternion.Lerp(toRot, fromRot, _delay / sequence.duration)
-                    );
+                    UpdateCutscene();
                     break;
                 case Phase.Waiting when _delay <= 0:
                     _phase = Phase.CountingDown;
@@ -65,6 +60,22 @@ namespace Maps
                     ManualBoatControl.Current.enabled = true;
                     break;
             }
+        }
+
+        private void UpdateCutscene()
+        {
+            var sequence = cutscenes[_index];
+            sequence.from.GetPositionAndRotation(out var fromPos, out var fromRot);
+            sequence.to.GetPositionAndRotation(out var toPos, out var toRot);
+            cam.SetPositionAndRotation(
+                Vector3.Lerp(toPos, fromPos, _delay / sequence.duration),
+                Quaternion.Lerp(toRot, fromRot, _delay / sequence.duration)
+            );
+            if (!InputSystem.actions["Jump"].WasPressedThisFrame())
+                return;
+            ManualBoatControl.Current.Mount(cam);
+            _phase = Phase.CountingDown;
+            _delay = TimeToStart = Countdown;
         }
 
         private enum Phase

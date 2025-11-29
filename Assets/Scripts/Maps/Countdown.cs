@@ -16,6 +16,9 @@ namespace Maps
         private TextMeshProUGUI large;
 
         [SerializeField]
+        private TextMeshProUGUI skip;
+
+        [SerializeField]
         private AudioSource source;
 
         [SerializeField]
@@ -41,6 +44,7 @@ namespace Maps
             {
                 large.enabled = true;
                 small.enabled = false;
+                skip.enabled = false;
             }
 
             if (time > Starter.Countdown)
