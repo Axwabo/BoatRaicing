@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Ice_Texture:
+        m_Texture: {fileID: 2800000, guid: 6721bae68f480aa4c9d090c7310d8ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
         m_Texture: {fileID: 2800000, guid: 6721bae68f480aa4c9d090c7310d8ce7, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -42,14 +46,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Metallic: 1.62
-    - _Normals: 0.04
+    - _Fresnel_Strength: 0.35
+    - _Metallic: 1
+    - _Normals: 0.25
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Refraction: 0.19
+    - _Refraction: 0.13
     - _Smoothness: 1
+    - _Tiling: 2
     m_Colors:
     - _Color: {r: 3.776789, g: 7.0163107, b: 7.773585, a: 1}
+    - _Fresnel_Color: {r: 0.43867922, g: 0.9274795, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3858455082004792668
