@@ -1,12 +1,14 @@
-﻿using System;
-using Menu;
+﻿using Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public sealed class CameraRotor : MonoBehaviour
 {
 
-    private const float Sensitivity = 0.1f;
+    public const float DefaultSensitivity = 0.1f;
+    public const string SensitivityKey = "Sensitivity";
+
+    public static float Sensitivity { get; set; } = DefaultSensitivity;
 
     private Transform _camera;
 
@@ -19,6 +21,7 @@ public sealed class CameraRotor : MonoBehaviour
     {
         _camera = transform;
         _player = _camera.parent;
+        Sensitivity = PlayerPrefs.GetFloat(SensitivityKey, DefaultSensitivity);
     }
 
     private void OnEnable() => Cursor.lockState = CursorLockMode.Locked;
@@ -34,6 +37,6 @@ public sealed class CameraRotor : MonoBehaviour
         _player.localEulerAngles = new Vector3(0, _yaw, 0);
     }
 
-    private void OnDestroy() => Cursor.lockState=CursorLockMode.None;
+    private void OnDestroy() => Cursor.lockState = CursorLockMode.None;
 
 }
