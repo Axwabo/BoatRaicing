@@ -9,11 +9,6 @@ public sealed class ManualBoatControl : MonoBehaviour
 
     private void Awake() => _boat = GetComponent<Boat>();
 
-    private void FixedUpdate()
-    {
-        _boat.Row(InputSystem.actions["Move"].ReadValue<Vector2>());
-        if (InputSystem.actions["Jump"].WasPressedThisFrame())
-            _boat.Jump();
-    }
+    private void FixedUpdate() => _boat.Row(InputSystem.actions["Move"].ReadValue<Vector2>());
 
 }
