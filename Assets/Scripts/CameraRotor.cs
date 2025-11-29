@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Menu;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public sealed class CameraRotor : MonoBehaviour
@@ -17,14 +19,13 @@ public sealed class CameraRotor : MonoBehaviour
     {
         _camera = transform;
         _player = _camera.parent;
-        Cursor.lockState = CursorLockMode.Locked;
     }
+
+    private void OnEnable() => Cursor.lockState = CursorLockMode.Locked;
 
     private void Update()
     {
-        if (InputSystem.actions["Attack"].WasPressedThisFrame())
-            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-        if (Cursor.lockState != CursorLockMode.Locked)
+        if (Overlay.IsOpen)
             return;
         var delta = InputSystem.actions["Look"].ReadValue<Vector2>();
         _yaw = Mathf.Clamp(_yaw + delta.x * Sensitivity, -120, 120);
@@ -32,5 +33,7 @@ public sealed class CameraRotor : MonoBehaviour
         _camera.localEulerAngles = new Vector3(_pitch, 0, 0);
         _player.localEulerAngles = new Vector3(0, _yaw, 0);
     }
+
+    private void OnDestroy() => Cursor.lockState=CursorLockMode.None;
 
 }

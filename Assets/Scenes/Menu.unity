@@ -971,6 +971,7 @@ GameObject:
   - component: {fileID: 1298040272}
   - component: {fileID: 1298040271}
   - component: {fileID: 1298040270}
+  - component: {fileID: 1298040273}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -1080,6 +1081,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298040268}
   m_CullTransparentMesh: 1
+--- !u!114 &1298040273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298040268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d624f5e355a4f8eb25266882a2ccecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Menu.SceneLoaderButton
+  sceneName: SampleScene
 --- !u!1 &1350070480
 GameObject:
   m_ObjectHideFlags: 0
