@@ -1,9 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 public sealed class Boat : MonoBehaviour
 {
+
+    private const float AngleMultiplier = 10;
+    private const float CircumferenceModulus = 360 / AngleMultiplier;
 
     private Rigidbody _rb;
 
@@ -54,6 +58,7 @@ public sealed class Boat : MonoBehaviour
             return;
         _rightTarget += forwards * 0.5f;
         _leftTarget += forwards * 0.5f;
+        AdjustOarsForward(forwards, sideways);
         var linear = _rb.linearVelocity;
         var multiplier = Math.Sign(_t.InverseTransformDirection(linear).z) == forwards
             ? Mathf.Min(1, linear.MagnitudeIgnoreY() / accelerationMultiplierTarget) * accelerationMultiplierRatio + 1
@@ -76,12 +81,26 @@ public sealed class Boat : MonoBehaviour
         }
     }
 
+    private void AdjustOarsForward(int forwards, int sideways)
+    {
+        if (sideways != 0)
+            return;
+        var rightMod = _rightTarget % CircumferenceModulus;
+        var leftMod = _leftTarget % CircumferenceModulus;
+        if (Mathf.Abs(rightMod - leftMod) is < 1 or > CircumferenceModulus - 1)
+            return;
+        if (Random.value < 0.5f)
+            _rightTarget += (_leftTarget - _rightTarget) % CircumferenceModulus * forwards;
+        else
+            _leftTarget += (_rightTarget - _leftTarget) % CircumferenceModulus * forwards;
+    }
+
     private void Update()
     {
         _rightAngle = Mathf.Lerp(_rightAngle, _rightTarget, Time.deltaTime * 3);
         _leftAngle = Mathf.Lerp(_leftAngle, _leftTarget, Time.deltaTime * 3);
-        rightOar.localEulerAngles = new Vector3(_rightAngle * 10, 0, 0);
-        leftOar.localEulerAngles = new Vector3(_leftAngle * 10, 0, 0);
+        rightOar.localEulerAngles = new Vector3(_rightAngle * AngleMultiplier, 0, 0);
+        leftOar.localEulerAngles = new Vector3(_leftAngle * AngleMultiplier, 0, 0);
     }
 
 }
