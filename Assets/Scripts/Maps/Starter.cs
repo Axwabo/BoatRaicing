@@ -7,8 +7,8 @@ namespace Maps
     public sealed class Starter : MonoBehaviour
     {
 
-        private const float Waiting = 10;
-        private const float Countdown = 3;
+        public const int Waiting = 10;
+        public const int Countdown = 3;
 
         public static float TimeToStart { get; private set; }
 
@@ -24,11 +24,9 @@ namespace Maps
         [SerializeField]
         private CutsceneSequence[] cutscenes;
 
-        private void Start()
-        {
-            ManualBoatControl.Current.enabled = false;
-            TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
-        }
+        private void Awake() => TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
+
+        private void Start() => ManualBoatControl.Current.enabled = false;
 
         private void Update()
         {
@@ -60,9 +58,11 @@ namespace Maps
                     _phase = Phase.CountingDown;
                     _delay += Countdown;
                     break;
+                case Phase.CountingDown when _delay <= -1:
+                    Destroy(this);
+                    break;
                 case Phase.CountingDown when _delay <= 0:
                     ManualBoatControl.Current.enabled = true;
-                    Destroy(this);
                     break;
             }
         }
