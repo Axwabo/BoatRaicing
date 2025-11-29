@@ -10,6 +10,9 @@ public sealed class CameraRotor : MonoBehaviour
 
     private Transform _player;
 
+    private float _yaw;
+    private float _pitch;
+
     private void Awake()
     {
         _camera = transform;
@@ -24,8 +27,10 @@ public sealed class CameraRotor : MonoBehaviour
         if (Cursor.lockState != CursorLockMode.Locked)
             return;
         var delta = InputSystem.actions["Look"].ReadValue<Vector2>();
-        _camera.Rotate(-delta.y * Sensitivity, 0, 0);
-        _player.Rotate(0, delta.x * Sensitivity, 0);
+        _yaw = Mathf.Clamp(_yaw + delta.x * Sensitivity, -120, 120);
+        _pitch = Mathf.Clamp(_pitch - delta.y * Sensitivity, -90, 90);
+        _camera.localEulerAngles = new Vector3(_pitch, 0, 0);
+        _player.localEulerAngles = new Vector3(0, _yaw, 0);
     }
 
 }
