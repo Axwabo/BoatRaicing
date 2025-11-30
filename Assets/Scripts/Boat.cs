@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,10 +7,14 @@ using Random = UnityEngine.Random;
 public sealed class Boat : MonoBehaviour
 {
 
+    private static readonly List<Boat> Instances = new();
+
     private const float AngleMultiplier = 10;
     private const float CircumferenceModulus = 360 / AngleMultiplier;
 
     public static int Walls => LayerMask.GetMask("Default", "Silent");
+
+    public static IReadOnlyCollection<Boat> Boats => Instances;
 
     private Rigidbody _rb;
 
@@ -53,6 +58,7 @@ public sealed class Boat : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _t = transform;
+        Instances.Add(this);
     }
 
     public void Row(Vector2 move)
@@ -112,6 +118,8 @@ public sealed class Boat : MonoBehaviour
         rightOar.localEulerAngles = new Vector3(_rightAngle * AngleMultiplier, 0, 0);
         leftOar.localEulerAngles = new Vector3(_leftAngle * AngleMultiplier, 0, 0);
     }
+
+    private void OnDestroy() => Instances.Remove(this);
 
     private bool IsGrounded => Raycast(_t.position)
                                || Raycast(_t.TransformPoint(new Vector3(leftOar.localPosition.x, 0, 0)))

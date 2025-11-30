@@ -10,6 +10,8 @@ namespace Maps
 
         public static Timer Current { get; private set; }
 
+        public static double QualifiedAt { get; private set; }
+
         private double _startTimestamp;
 
         [SerializeField]
@@ -18,7 +20,11 @@ namespace Maps
         [SerializeField]
         private TextMeshProUGUI large;
 
-        private void Awake() => Current = this;
+        private void Awake()
+        {
+            Current = this;
+            QualifiedAt = 0;
+        }
 
         private void Update()
         {
@@ -35,6 +41,7 @@ namespace Maps
 
         public void Finish(int place)
         {
+            QualifiedAt = Time.timeSinceLevelLoadAsDouble;
             enabled = false;
             large.enabled = true;
             large.text = $"#{place}";
