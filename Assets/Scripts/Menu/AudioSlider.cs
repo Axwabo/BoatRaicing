@@ -18,7 +18,7 @@ namespace Menu
 
         protected override float Value
         {
-            set => mixer.SetFloat(Label, Mathf.Approximately(0, value) ? -80 : 20 * Mathf.Log10(value));
+            set => mixer.Set(Label, value);
         }
 
         protected override float DefaultValue => defaultValue;

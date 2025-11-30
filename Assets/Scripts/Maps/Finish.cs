@@ -7,9 +7,11 @@ namespace Maps
     public sealed class Finish : MonoBehaviour
     {
 
+        public const int LapCount = 3;
+
         public static Finish Current { get; private set; }
 
-        public static int RequiredLaps { get; set; } = 1;
+        public static int RequiredLaps { get; set; } = LapCount; // TODO: set back to 1
 
         private int _qualified;
 
@@ -36,8 +38,6 @@ namespace Maps
             _source.Play();
             Timer.Current.Finish(_qualified);
         }
-
-        public const int LapCount = 3;
 
     }
 

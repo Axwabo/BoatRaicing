@@ -20,6 +20,8 @@ namespace Bots
 
         private float _unstuck;
 
+        private int _lap;
+
         [SerializeField]
         private float angleThreshold = 3;
 
@@ -43,7 +45,10 @@ namespace Bots
 
         private void FixedUpdate()
         {
-            if (Starter.TimeToStart > 0 || _index >= Starter.TargetPoints.Count || TryUnstuck())
+            if (Starter.TimeToStart > 0)
+                return;
+            CheckLap();
+            if (_index >= Starter.TargetPoints.Count || TryUnstuck())
                 return;
             var target = Starter.TargetPoints[_index];
             var position = _t.position;
@@ -70,6 +75,14 @@ namespace Bots
                 rowing.y = -1;
 
             _boat.Row(rowing);
+        }
+
+        private void CheckLap()
+        {
+            if (_lap == _boat.Laps)
+                return;
+            _lap = _boat.Laps;
+            _index = 0;
         }
 
         private bool TryUnstuck()
