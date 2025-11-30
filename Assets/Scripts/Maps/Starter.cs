@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Bots;
 using Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +21,8 @@ namespace Maps
         public const int TotalBoats = Bots + 1;
 
         public static float TimeToStart { get; private set; }
+
+        public static IReadOnlyList<TargetPoint> TargetPoints { get; private set; }
 
         private Phase _phase;
 
@@ -44,12 +48,16 @@ namespace Maps
         [SerializeField]
         private Boat botPrefab;
 
+        [SerializeField]
+        private TargetPoint[] targets;
+
         private Vector3 Right => startPoint.TransformPoint(new Vector3(startSpread, 0, 0));
 
         private Vector3 Left => startPoint.TransformPoint(new Vector3(-startSpread, 0, 0));
 
         private void Awake()
         {
+            TargetPoints = targets;
             TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
             SpawnBoats();
         }

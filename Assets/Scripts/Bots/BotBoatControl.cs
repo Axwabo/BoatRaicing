@@ -12,6 +12,8 @@ namespace Bots
 
         private Transform _t;
 
+        private int _index;
+
         private void Awake()
         {
             _boat = GetComponent<Boat>();
@@ -20,8 +22,9 @@ namespace Bots
 
         private void FixedUpdate()
         {
-            if (Starter.TimeToStart > 0)
+            if (Starter.TimeToStart > 0 || _index >= Starter.TargetPoints.Count)
                 return;
+            var target = Starter.TargetPoints[_index];
         }
 
     }
