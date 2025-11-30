@@ -1,4 +1,5 @@
 ﻿using Maps;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,11 +13,16 @@ namespace Menu
         [SerializeField]
         private Image image;
 
-        private MapDescriptor _descriptor;
+        [SerializeField]
+        private TextMeshProUGUI text;
 
-        protected override void Click() => SceneManager.LoadScene(_descriptor.name);
+        protected override void Click() => SceneManager.LoadScene(text.text);
 
-        public void Apply(MapDescriptor descriptor) => image.sprite = descriptor.Image;
+        public void Apply(MapDescriptor descriptor)
+        {
+            image.sprite = descriptor.Image;
+            text.text = descriptor.name;
+        }
 
     }
 
