@@ -38,6 +38,7 @@ namespace Maps
             enabled = false;
             large.enabled = true;
             large.text = $"#{place}";
+            small.color = Color.green;
         }
 
     }
