@@ -1,4 +1,5 @@
 ﻿using Maps;
+using Menu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,7 +42,7 @@ public sealed class SpectatingHandler : MonoBehaviour
             return;
         main.text = IsSelf ? "Left click to spectate" : $"Spectating Bot {_spectating + 1}";
         main.enabled = true;
-        if (!InputSystem.actions["Attack"].WasPressedThisFrame())
+        if (Overlay.IsOpen || !InputSystem.actions["Attack"].WasPressedThisFrame())
             return;
         if (!_everClicked)
             large.enabled = false;
