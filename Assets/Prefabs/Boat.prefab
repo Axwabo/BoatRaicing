@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 8858384159493748259}
   - component: {fileID: 5375941603669919698}
   - component: {fileID: 6050933808497130255}
+  - component: {fileID: 3323273379492007954}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -436,6 +437,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3323273379492007954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650946984787331049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f555a70069d4b999b54d9487572de6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bots.RandomMaterial
+  materials:
+  - {fileID: 2100000, guid: 5c671c3105a7d3246acdfd3455c44092, type: 2}
+  - {fileID: 2100000, guid: f04a3c6e62e1bcd46b86a08bf5aee412, type: 2}
+  - {fileID: 2100000, guid: 81dcecfc8dad6a4409f113f1491f8de3, type: 2}
+  - {fileID: 2100000, guid: a630e4143725b1a41b3543b092ae1fe7, type: 2}
+  - {fileID: 2100000, guid: a1f7dd8b444af3c4b93abae547777d35, type: 2}
+  - {fileID: 2100000, guid: 753d25f464dde6f40baba3174554c98c, type: 2}
 --- !u!1 &3751570053163389233
 GameObject:
   m_ObjectHideFlags: 0
