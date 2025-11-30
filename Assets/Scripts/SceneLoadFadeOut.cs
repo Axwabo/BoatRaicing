@@ -37,7 +37,8 @@ public sealed class SceneLoadFadeOut : MonoBehaviour
             return;
         _volume -= Time.unscaledDeltaTime;
         foreach (var source in sources)
-            source.volume = _volume;
+            if (source)
+                source.volume = _volume;
         if (_volume > 0)
             return;
         SceneManager.sceneLoaded -= OnSceneLoaded;
