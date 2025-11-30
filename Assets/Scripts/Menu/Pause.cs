@@ -9,7 +9,17 @@ namespace Menu
 
         private TextMeshProUGUI _text;
 
-        private void Start() => _text = GetComponentInChildren<TextMeshProUGUI>();
+        private void OnEnable()
+        {
+            if (AutoPause.Enabled)
+                Set(true);
+        }
+
+        private void Start()
+        {
+            _text = GetComponentInChildren<TextMeshProUGUI>();
+            _text.text = AudioListener.pause ? "Continue" : "Pause";
+        }
 
         protected override void Click() => Set(!AudioListener.pause);
 
@@ -17,7 +27,14 @@ namespace Menu
         {
             AudioListener.pause = paused;
             Time.timeScale = paused ? 0 : 1;
-            _text.text = paused ? "Continue" : "Pause";
+            if (didStart)
+                _text.text = paused ? "Continue" : "Pause";
+        }
+
+        private void OnDisable()
+        {
+            if (AutoPause.Enabled)
+                Set(false);
         }
 
         private void OnDestroy() => Set(false);
