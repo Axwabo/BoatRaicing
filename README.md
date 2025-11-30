@@ -5,7 +5,7 @@ A 3D Unity game where you race with boats on ice.
 First one to the finish line wins.
 After completing the map, you can spectate other bots.
 
-Maps were made entirely out of primitive meshes (cubes, quads),
+Maps were made entirely out of primitive meshes (cubes, quads, cylinders),
 which limits the looks and physics.
 Some ice is covered by wide bars, you could look at this as a stylistic choice.
 I chose this path primarily to have to avoid using Blender.
@@ -26,6 +26,8 @@ This will apply force in the boat's facing direction.
 
 Rowing in the opposite direction (e.g. backwards when going forwards)
 leads to slower deceleration than if you were to accelerate.
+
+No force is applied when trying to row mid-air.
 
 There is a terminal velocity that you can't exceed.
 
@@ -51,6 +53,27 @@ Bouncing off the wall when going sideways applies torque in the wrong direction.
 Yet again, I blame this wonderful game engine (it's actually not my fault).
 
 Touchscreens aren't supported yet.
+
+# Bots
+
+I did some black magic and magic number abuse to get the bots working decently.
+
+Several target points are placed in the editor which the bots follow.
+When a bot passes the plane of a target point, it goes to the next one.
+
+Bots try to turn in the direction of the next target point but aren't
+very good at managing the slipperiness of ice.
+
+They row forwards when they're facing close enough to the direction of the target.
+
+They row backwards when the difference between the following values is greater than a set amount:
+
+- distance from the current point to the forwards point of the target
+- distance from `position + velocity * fixedDeltaTime` to the forwards point of the target
+
+If the boat is stuck (facing a wall directly for more than 2 seconds),
+the bot will row backwards for 2 seconds.
+This overrides any other movement.
 
 # Assets Used
 
