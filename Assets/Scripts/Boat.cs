@@ -62,6 +62,8 @@ public sealed class Boat : MonoBehaviour
         _rightTarget += forwards * 0.5f;
         _leftTarget += forwards * 0.5f;
         AdjustOarsForward(forwards, sideways);
+        if (!IsGrounded)
+            return;
         var linear = _rb.linearVelocity;
         var multiplier = Math.Sign(_t.InverseTransformDirection(linear).z) == forwards
             ? Mathf.Min(1, linear.MagnitudeIgnoreY() / accelerationMultiplierTarget) * accelerationMultiplierRatio + 1
@@ -71,7 +73,8 @@ public sealed class Boat : MonoBehaviour
 
     private void Turn(int sideways)
     {
-        _rb.AddTorque(0, sideways * torque * Time.fixedDeltaTime, 0);
+        if (IsGrounded)
+            _rb.AddTorque(0, sideways * torque * Time.fixedDeltaTime, 0);
         if (sideways < 0)
         {
             _rightTarget++;
@@ -105,5 +108,12 @@ public sealed class Boat : MonoBehaviour
         rightOar.localEulerAngles = new Vector3(_rightAngle * AngleMultiplier, 0, 0);
         leftOar.localEulerAngles = new Vector3(_leftAngle * AngleMultiplier, 0, 0);
     }
+
+    private bool IsGrounded => Raycast(_t.position)
+                               || Raycast(_t.TransformPoint(new Vector3(leftOar.localPosition.x, 0, 0)))
+                               || Raycast(_t.TransformPoint(new Vector3(rightOar.localPosition.x, 0, 0)));
+
+    private bool Raycast(Vector3 position)
+        => Physics.Raycast(position, Vector3.down, 0.1f, LayerMask.GetMask("Default"));
 
 }
