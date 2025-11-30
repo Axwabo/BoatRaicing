@@ -44,8 +44,7 @@ namespace Maps
 
                     _phase = Phase.Waiting;
                     _delay += Waiting;
-                    ManualBoatControl.Current.Mount(cam);
-                    Finish.Current.Hide();
+                    Prepare();
                     break;
                 case Phase.Cutscenes:
                     UpdateCutscene();
@@ -63,6 +62,12 @@ namespace Maps
             }
         }
 
+        private void Prepare()
+        {
+            ManualBoatControl.Current.Mount(cam);
+            Finish.Current.Hide();
+        }
+
         private void UpdateCutscene()
         {
             var sequence = cutscenes[_index];
@@ -74,7 +79,7 @@ namespace Maps
             );
             if (!InputSystem.actions["Jump"].WasPressedThisFrame())
                 return;
-            ManualBoatControl.Current.Mount(cam);
+            Prepare();
             _phase = Phase.CountingDown;
             _delay = TimeToStart = Countdown;
         }
