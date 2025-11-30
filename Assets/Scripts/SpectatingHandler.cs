@@ -39,10 +39,12 @@ public sealed class SpectatingHandler : MonoBehaviour
         if (Timer.QualifiedAt == 0)
             return;
         main.text = IsSelf ? "Left click to spectate" : $"Spectating Bot {_spectating + 1}";
+        main.enabled = true;
         if (!InputSystem.actions["Attack"].WasPressedThisFrame())
             return;
         if (!_everClicked)
             large.enabled = false;
+
         _everClicked = true;
         if (++_spectating >= Boat.Boats.Count)
             _spectating = 0;
