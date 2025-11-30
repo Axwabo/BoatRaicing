@@ -8,6 +8,8 @@ namespace Menu
 
         private bool _started;
 
+        private float _delay = 1;
+
         [SerializeField]
         private AudioSource a;
 
@@ -25,6 +27,8 @@ namespace Menu
 
         private void Update()
         {
+            if ((_delay -= Time.deltaTime) > 0)
+                return;
             if (!_started)
             {
                 a.PlayOneShot(start);
