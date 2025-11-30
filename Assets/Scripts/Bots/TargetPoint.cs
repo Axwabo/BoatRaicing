@@ -10,9 +10,6 @@ namespace Bots
 
         public Vector3 Facing { get; private set; }
 
-        [SerializeField]
-        private Transform debug;
-
         private void Awake()
         {
             var t = transform;
@@ -26,13 +23,6 @@ namespace Bots
             var pos = transform.position;
             Gizmos.DrawSphere(pos, 0.1f);
             Gizmos.DrawLine(pos, transform.TransformPoint(Vector3.forward));
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            if (!debug)
-                return;
-            Debug.Log(Vector3.Dot(debug.position - transform.position, transform.TransformPoint(Vector3.forward) - transform.position));
         }
 
     }

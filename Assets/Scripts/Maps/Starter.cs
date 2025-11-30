@@ -49,7 +49,7 @@ namespace Maps
         private Boat botPrefab;
 
         [SerializeField]
-        private TargetPoint[] targets;
+        private Transform targets;
 
         private Vector3 Right => startPoint.TransformPoint(new Vector3(startSpread, 0, 0));
 
@@ -57,7 +57,7 @@ namespace Maps
 
         private void Awake()
         {
-            TargetPoints = targets;
+            TargetPoints = targets.GetComponentsInChildren<TargetPoint>();
             TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
             SpawnBoats();
         }
