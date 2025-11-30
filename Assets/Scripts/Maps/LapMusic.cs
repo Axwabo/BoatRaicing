@@ -20,12 +20,6 @@ namespace Maps
         [SerializeField]
         private string intense;
 
-        [SerializeField]
-        private GameObject mainParent;
-
-        [SerializeField]
-        private GameObject intenseParent;
-
         private void Awake()
         {
             mixer.Set(main, 1);
@@ -38,22 +32,12 @@ namespace Maps
         {
             if (ManualBoatControl.Current.Boat.Laps != Finish.LapCount - 1)
                 return;
-            if (_fade == 0)
-                ApplyTime();
             _fade += Time.deltaTime * Ratio;
             var progress = Mathf.Clamp01(_fade);
             mixer.Set(main, 1 - progress);
             mixer.Set(intense, progress);
             if (_fade >= 1)
                 Destroy(this);
-        }
-
-        private void ApplyTime()
-        {
-            var mainSources = mainParent.GetComponentsInChildren<AudioSource>();
-            var intenseSources = intenseParent.GetComponentsInChildren<AudioSource>();
-            for (var i = 0; i < mainSources.Length; i++)
-                intenseSources[i].timeSamples = mainSources[i].timeSamples;
         }
 
     }
