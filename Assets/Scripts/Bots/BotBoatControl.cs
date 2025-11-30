@@ -20,6 +20,12 @@ namespace Bots
         [SerializeField]
         private float distanceThreshold = 1;
 
+        [SerializeField]
+        private float smallDistanceThreshold = 0.5f;
+
+        [SerializeField]
+        private float brakingThreshold = 1;
+
         private void Awake()
         {
             _boat = GetComponent<Boat>();
@@ -45,6 +51,14 @@ namespace Bots
 
             var rowing = new Vector2();
             Row(angle, ref rowing);
+
+            var distanceFromNextPosition = DistanceToFacing(target, position + _boat.LinearVelocity * Time.fixedDeltaTime);
+            var distanceFromCurrent = DistanceToFacing(target, position);
+            var distance = Mathf.Abs(distanceFromCurrent - distanceFromNextPosition);
+            if (distance < smallDistanceThreshold / Mathf.Min(distanceThreshold, distanceFromCurrent))
+                rowing.y = 1;
+            else if (distance > brakingThreshold / Mathf.Min(distanceThreshold, distanceFromCurrent))
+                rowing.y = -1;
 
             _boat.Row(rowing);
         }

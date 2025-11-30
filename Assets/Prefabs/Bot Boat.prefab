@@ -77,3 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961a38c303ff4ce5aa73a09c08923afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bots.BotBoatControl
+  angleThreshold: 5
+  distanceThreshold: 5
+  smallDistanceThreshold: 0.3
+  brakingThreshold: 0.6
