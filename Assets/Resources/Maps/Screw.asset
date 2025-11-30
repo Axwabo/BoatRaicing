@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f220de17a4b14ce4a49dbacc54759170, type: 3}
   m_Name: Screw
   m_EditorClassIdentifier: Assembly-CSharp::Maps.MapDescriptor
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 99750b56c5add3145bbe6e4cbfdde398, type: 3}
