@@ -24,6 +24,9 @@ This will apply force in the boat's facing direction.
 
 `A/D` to turn left or right.
 
+Rowing in the opposite direction (e.g. backwards when going forwards)
+leads to slower deceleration than if you were to accelerate.
+
 There is a terminal velocity that you can't exceed.
 
 Move the mouse to look around, though you can't do full 360 rotations.
@@ -43,6 +46,9 @@ The bots aren't exactly smart, they (try to) move along pre-defined target point
 Maybe treat this as if you were super skillful :3
 
 The music can pop a little when it loops, I couldn't do much about it :(
+
+Bouncing off the wall when going sideways applies torque in the wrong direction.
+Yet again, I blame this wonderful game engine (it's actually not my fault).
 
 Touchscreens aren't supported yet.
 
