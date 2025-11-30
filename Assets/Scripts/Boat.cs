@@ -14,7 +14,7 @@ public sealed class Boat : MonoBehaviour
 
     public static int Walls => LayerMask.GetMask("Default", "Silent");
 
-    public static IReadOnlyCollection<Boat> Boats => Instances;
+    public static IReadOnlyList<Boat> Boats => Instances;
 
     private Rigidbody _rb;
 
@@ -134,13 +134,16 @@ public sealed class Boat : MonoBehaviour
         Player.enabled = false;
         cam.parent = playerTransform;
         cam.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        var camGo = cam.gameObject;
-        if (camGo.TryGetComponent(out CameraRotor rotor))
-            Destroy(rotor);
-        camGo.AddComponent<CameraRotor>();
         playerTransform.localRotation = Quaternion.identity;
+        if (this == ManualBoatControl.Current.Boat)
+            cam.gameObject.AddComponent<CameraRotor>();
     }
 
-    public void Unmount() => Player.enabled = true;
+    public void Unmount(Transform cam)
+    {
+        Player.enabled = true;
+        if (cam.gameObject.TryGetComponent(out CameraRotor rotor))
+            Destroy(rotor);
+    }
 
 }
