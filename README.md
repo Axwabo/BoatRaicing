@@ -5,12 +5,17 @@ A 3D Unity game where you race with boats on ice.
 First one to the finish line wins.
 After completing the map, you can spectate other bots.
 
+> [!IMPORTANT]
+> Please read the [known issues](#known-issues) before playing.
+
 Maps were made entirely out of primitive meshes (cubes, quads, cylinders),
 which limits the looks and physics.
 Some ice is covered by wide bars, you could look at this as a stylistic choice.
 I chose this path primarily to have to avoid using Blender.
 
 This is pretty much my first "proper" physics-based Unity game.
+
+The `Infinity` map is a loop, 3 laps are required to qualify.
 
 # Controls
 
@@ -19,10 +24,12 @@ Press `Tab` to open the in-game menu.
 The ice is slippery, so it's not the easiest to control the boat.
 Try out the `Tutorial` in the main menu to get a feel for it.
 
+The ice physics are meant to resemble a system similar to that of Minecraft.
+
 `W/S` to go forwards/backwards.
 This will apply force in the boat's facing direction.
 
-`A/D` to turn left or right.
+`A/D` to turn left/right.
 
 Rowing in the opposite direction (e.g. backwards when going forwards)
 leads to slower deceleration than if you were to accelerate.
