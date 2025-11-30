@@ -2,6 +2,7 @@
 using Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Maps
 {
@@ -9,8 +10,13 @@ namespace Maps
     public sealed class Starter : MonoBehaviour
     {
 
+        private static readonly Vector3 UpOffset = Vector3.up * 0.3f;
+
         public const int Waiting = 5;
         public const int Countdown = 3;
+
+        public const int Bots = 4;
+        public const int TotalBoats = Bots + 1;
 
         public static float TimeToStart { get; private set; }
 
@@ -26,13 +32,47 @@ namespace Maps
         [SerializeField]
         private CutsceneSequence[] cutscenes;
 
-        private void Awake() => TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
+        [SerializeField]
+        private Transform startPoint;
+
+        [SerializeField]
+        private float startSpread;
+
+        [SerializeField]
+        private Boat manualPrefab;
+
+        [SerializeField]
+        private Boat botPrefab;
+
+        private Vector3 Right => startPoint.TransformPoint(new Vector3(startSpread, 0, 0));
+
+        private Vector3 Left => startPoint.TransformPoint(new Vector3(-startSpread, 0, 0));
+
+        private void Awake()
+        {
+            TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
+            SpawnBoats();
+        }
 
         private void Start()
         {
             ManualBoatControl.Current.enabled = false;
             if (AlwaysSkipCutscenes.Skip)
                 Skip();
+        }
+
+        private void SpawnBoats()
+        {
+            const float lerpInterval = 1f / Bots;
+            var playerPosition = Random.Range(0, TotalBoats);
+            var left = Left;
+            var right = Right;
+            var rotation = startPoint.rotation;
+            for (var i = 0; i < TotalBoats; i++)
+            {
+                var position = Vector3.Lerp(left, right, lerpInterval * i) + UpOffset;
+                Instantiate(i == playerPosition ? manualPrefab : botPrefab, position, rotation);
+            }
         }
 
         private void Update()
@@ -92,6 +132,17 @@ namespace Maps
             Prepare();
             _phase = Phase.CountingDown;
             _delay = TimeToStart = Countdown;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!startPoint)
+                return;
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(
+                Left,
+                Right
+            );
         }
 
         private enum Phase
