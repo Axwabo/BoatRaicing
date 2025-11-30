@@ -807,6 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705548952}
   - component: {fileID: 705548953}
+  - component: {fileID: 705548954}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -848,6 +849,21 @@ MonoBehaviour:
   start: {fileID: 8300000, guid: 13f6a229e8493194ca2adad895e0ad95, type: 3}
   loopDelay: 0.48
   loop: {fileID: 8300000, guid: d45f5a993feee7341aa908bebd9811b8, type: 3}
+--- !u!114 &705548954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705548951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bd10836d934b329ff18a65ddf6461c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoadFadeOut
+  sources:
+  - {fileID: 1842848989}
+  - {fileID: 1531256974}
 --- !u!1 &852576284
 GameObject:
   m_ObjectHideFlags: 0
