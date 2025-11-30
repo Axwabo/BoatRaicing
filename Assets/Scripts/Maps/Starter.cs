@@ -45,6 +45,7 @@ namespace Maps
                     _phase = Phase.Waiting;
                     _delay += Waiting;
                     ManualBoatControl.Current.Mount(cam);
+                    Finish.Current.Hide();
                     break;
                 case Phase.Cutscenes:
                     UpdateCutscene();

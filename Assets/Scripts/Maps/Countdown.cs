@@ -40,6 +40,8 @@ namespace Maps
             if (time == _previousTime)
                 return;
             _previousTime = time;
+            if (time == Starter.Waiting + Starter.Countdown)
+                skip.enabled = false;
             if (time == Starter.Countdown)
             {
                 large.enabled = true;
