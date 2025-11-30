@@ -8,7 +8,7 @@ namespace Editor
     {
 
         [MenuItem("Assets/Screenshot")]
-        public static void Grab() => ScreenCapture.CaptureScreenshot("Assets/Screenshot.png", 2);
+        public static void Grab() => ScreenCapture.CaptureScreenshot("Assets/Screenshot.png");
 
     }
 
