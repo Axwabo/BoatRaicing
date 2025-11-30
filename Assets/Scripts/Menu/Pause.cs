@@ -21,7 +21,12 @@ namespace Menu
             _text.text = AudioListener.pause ? "Continue" : "Pause";
         }
 
-        protected override void Click() => Set(!AudioListener.pause);
+        protected override void Click()
+        {
+            Set(!AudioListener.pause);
+            if (AutoPause.Enabled && !AudioListener.pause)
+                Overlay.Hide();
+        }
 
         private void Set(bool paused)
         {
