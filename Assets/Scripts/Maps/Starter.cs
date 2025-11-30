@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,7 +28,12 @@ namespace Maps
 
         private void Awake() => TimeToStart = cutscenes.Sum(e => e.duration) + Waiting + Countdown;
 
-        private void Start() => ManualBoatControl.Current.enabled = false;
+        private void Start()
+        {
+            ManualBoatControl.Current.enabled = false;
+            if (AlwaysSkipCutscenes.Skip)
+                Skip();
+        }
 
         private void Update()
         {
@@ -77,8 +83,12 @@ namespace Maps
                 Vector3.Lerp(toPos, fromPos, _delay / sequence.duration),
                 Quaternion.Lerp(toRot, fromRot, _delay / sequence.duration)
             );
-            if (!InputSystem.actions["Jump"].WasPressedThisFrame())
-                return;
+            if (InputSystem.actions["Jump"].WasPressedThisFrame())
+                Skip();
+        }
+
+        private void Skip()
+        {
             Prepare();
             _phase = Phase.CountingDown;
             _delay = TimeToStart = Countdown;

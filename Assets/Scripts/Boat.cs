@@ -113,7 +113,7 @@ public sealed class Boat : MonoBehaviour
                                || Raycast(_t.TransformPoint(new Vector3(leftOar.localPosition.x, 0, 0)))
                                || Raycast(_t.TransformPoint(new Vector3(rightOar.localPosition.x, 0, 0)));
 
-    private bool Raycast(Vector3 position)
+    private static bool Raycast(Vector3 position)
         => Physics.Raycast(position, Vector3.down, 0.1f, LayerMask.GetMask("Default"));
 
 }

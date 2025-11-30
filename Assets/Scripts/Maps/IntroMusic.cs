@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Menu;
+using UnityEngine;
 
 namespace Maps
 {
@@ -13,7 +14,12 @@ namespace Maps
 
         private AudioSource _source;
 
-        private void Awake() => _source = GetComponent<AudioSource>();
+        private void Awake()
+        {
+            _source = GetComponent<AudioSource>();
+            if (!AlwaysSkipCutscenes.Skip)
+                _source.Play();
+        }
 
         private void Update()
         {
