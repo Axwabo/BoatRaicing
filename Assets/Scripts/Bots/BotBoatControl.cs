@@ -8,6 +8,8 @@ namespace Bots
     public sealed class BotBoatControl : MonoBehaviour
     {
 
+        private const float StuckTime = 2;
+
         private Boat _boat;
 
         private Transform _t;
@@ -78,14 +80,15 @@ namespace Bots
                 return true;
             }
 
-            if (!Physics.Raycast(_t.TransformPoint(new Vector3(0, 0, stuckThreshold)), _t.forward, 0.1f, Boat.Walls))
+            if (_boat.LinearVelocity.magnitude > Time.fixedDeltaTime * 3
+                || !Physics.Raycast(_t.TransformPoint(new Vector3(0, 0, stuckThreshold)), _t.forward, 0.1f, Boat.Walls))
             {
                 _stuck = 0;
                 return false;
             }
 
-            if ((_stuck += Time.fixedDeltaTime) > 5)
-                _unstuck = 5;
+            if ((_stuck += Time.fixedDeltaTime) > StuckTime)
+                _unstuck = StuckTime;
             return false;
         }
 
