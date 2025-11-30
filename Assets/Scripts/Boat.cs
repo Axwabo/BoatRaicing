@@ -9,6 +9,8 @@ public sealed class Boat : MonoBehaviour
     private const float AngleMultiplier = 10;
     private const float CircumferenceModulus = 360 / AngleMultiplier;
 
+    public static int Walls => LayerMask.GetMask("Default", "Silent");
+
     private Rigidbody _rb;
 
     private Transform _t;
@@ -116,6 +118,6 @@ public sealed class Boat : MonoBehaviour
                                || Raycast(_t.TransformPoint(new Vector3(rightOar.localPosition.x, 0, 0)));
 
     private static bool Raycast(Vector3 position)
-        => Physics.Raycast(position, Vector3.down, 0.1f, LayerMask.GetMask("Default", "Silent"));
+        => Physics.Raycast(position, Vector3.down, 0.1f, Walls);
 
 }

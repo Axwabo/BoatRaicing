@@ -81,3 +81,4 @@ MonoBehaviour:
   distanceThreshold: 5
   smallDistanceThreshold: 0.3
   brakingThreshold: 0.6
+  stuckThreshold: 0.7

@@ -14,6 +14,10 @@ namespace Bots
 
         private int _index;
 
+        private float _stuck;
+
+        private float _unstuck;
+
         [SerializeField]
         private float angleThreshold = 3;
 
@@ -26,6 +30,9 @@ namespace Bots
         [SerializeField]
         private float brakingThreshold = 1;
 
+        [SerializeField]
+        private float stuckThreshold = 0.6f;
+
         private void Awake()
         {
             _boat = GetComponent<Boat>();
@@ -34,7 +41,7 @@ namespace Bots
 
         private void FixedUpdate()
         {
-            if (Starter.TimeToStart > 0 || _index >= Starter.TargetPoints.Count)
+            if (Starter.TimeToStart > 0 || _index >= Starter.TargetPoints.Count || TryUnstuck())
                 return;
             var target = Starter.TargetPoints[_index];
             var position = _t.position;
@@ -50,7 +57,7 @@ namespace Bots
                 _index++;
 
             var rowing = new Vector2();
-            Row(angle, ref rowing);
+            Turn(angle, ref rowing);
 
             var distanceFromNextPosition = DistanceToFacing(target, position + _boat.LinearVelocity * Time.fixedDeltaTime);
             var distanceFromCurrent = DistanceToFacing(target, position);
@@ -63,7 +70,26 @@ namespace Bots
             _boat.Row(rowing);
         }
 
-        private void Row(float angle, ref Vector2 rowing)
+        private bool TryUnstuck()
+        {
+            if ((_unstuck -= Time.fixedDeltaTime) > 0)
+            {
+                _boat.Row(new Vector2(0, -1));
+                return true;
+            }
+
+            if (!Physics.Raycast(_t.TransformPoint(new Vector3(0, 0, stuckThreshold)), _t.forward, 0.1f, Boat.Walls))
+            {
+                _stuck = 0;
+                return false;
+            }
+
+            if ((_stuck += Time.fixedDeltaTime) > 5)
+                _unstuck = 5;
+            return false;
+        }
+
+        private void Turn(float angle, ref Vector2 rowing)
         {
             if (angle < -angleThreshold)
                 rowing.x = 1;
@@ -81,6 +107,8 @@ namespace Bots
 
         private void OnDrawGizmosSelected()
         {
+            Gizmos.color = Color.gray;
+            Gizmos.DrawSphere(transform.TransformPoint(Vector3.forward * stuckThreshold), 0.1f);
             if (_index >= Starter.TargetPoints.Count)
                 return;
             Gizmos.color = Color.red;
