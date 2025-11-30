@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public sealed class SpectatingHandler : MonoBehaviour
 {
 
+    public static bool IsSelf { get; private set; }
+
     private bool _everClicked;
 
     private int _manualIndex;
@@ -21,10 +23,9 @@ public sealed class SpectatingHandler : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI main;
 
-    private bool IsSelf => _manualIndex == _spectating;
-
     private void Start()
     {
+        IsSelf = true;
         for (var i = 0; i < Boat.Boats.Count; i++)
         {
             if (Boat.Boats[i] != ManualBoatControl.Current.Boat)
@@ -48,10 +49,13 @@ public sealed class SpectatingHandler : MonoBehaviour
         _everClicked = true;
         if (++_spectating >= Boat.Boats.Count)
             _spectating = 0;
+        IsSelf = _spectating == _manualIndex;
         ManualBoatControl.Current.enabled = IsSelf;
         foreach (var boat in Boat.Boats)
             boat.Unmount(cam);
         Boat.Boats[_spectating].Mount(cam);
+        if (IsSelf)
+            Timer.Current.ShowQualificationTime();
     }
 
 }

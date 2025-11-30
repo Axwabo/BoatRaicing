@@ -28,7 +28,7 @@ namespace Maps
 
         private void Update()
         {
-            if (Starter.TimeToStart > 0)
+            if (Starter.TimeToStart > 0 || QualifiedAt != 0 && SpectatingHandler.IsSelf)
                 return;
             if (_startTimestamp == 0)
             {
@@ -36,17 +36,20 @@ namespace Maps
                 _startTimestamp = Time.timeSinceLevelLoadAsDouble;
             }
 
-            small.text = TimeSpan.FromSeconds(Time.timeSinceLevelLoadAsDouble - _startTimestamp).ToString("mm':'ss'.'fff");
+            Show(Time.timeSinceLevelLoadAsDouble - _startTimestamp);
         }
+
+        private void Show(double seconds) => small.text = TimeSpan.FromSeconds(seconds).ToString("mm':'ss'.'fff");
 
         public void Finish(int place)
         {
             QualifiedAt = Time.timeSinceLevelLoadAsDouble;
-            enabled = false;
             large.enabled = true;
             large.text = $"#{place}";
             small.color = Color.green;
         }
+
+        public void ShowQualificationTime() => Show(QualifiedAt - _startTimestamp);
 
     }
 
