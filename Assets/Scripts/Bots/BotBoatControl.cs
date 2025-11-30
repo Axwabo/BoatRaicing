@@ -80,7 +80,7 @@ namespace Bots
                 return true;
             }
 
-            if (_boat.LinearVelocity.magnitude > Time.fixedDeltaTime * 3
+            if (_boat.LinearVelocity.magnitude > Time.fixedDeltaTime * 10
                 || !Physics.Raycast(_t.TransformPoint(new Vector3(0, 0, stuckThreshold)), _t.forward, 0.1f, Boat.Walls))
             {
                 _stuck = 0;
