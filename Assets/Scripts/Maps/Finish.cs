@@ -37,6 +37,8 @@ namespace Maps
             Timer.Current.Finish(_qualified);
         }
 
+        public const int LapCount = 3;
+
     }
 
 }
