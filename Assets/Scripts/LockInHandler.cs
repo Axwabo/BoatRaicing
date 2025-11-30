@@ -1,5 +1,4 @@
-﻿using Maps;
-using Menu;
+﻿using Menu;
 using TMPro;
 using UnityEngine;
 
@@ -23,10 +22,9 @@ public sealed class LockInHandler : MonoBehaviour
 
     private void LateUpdate()
     {
-        var locked = LockIn.Locked && Timer.QualifiedAt == 0;
-        if (_isLocked == locked)
+        if (_isLocked == LockIn.Locked)
             return;
-        _isLocked = locked;
+        _isLocked = LockIn.Locked;
         foreach (var meshRenderer in _renderers)
             meshRenderer.enabled = !_isLocked;
         foreach (var source in _sources)
