@@ -409,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &364714808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -797,6 +797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu.ToggleButton
   target: {fileID: 364714807}
+  deactivateOnLoad: 1
 --- !u!1 &705548951
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +865,7 @@ MonoBehaviour:
   sources:
   - {fileID: 1842848989}
   - {fileID: 1531256974}
+  keep: 0
 --- !u!1 &852576284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,33 +1102,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: Settings
       objectReference: {fileID: 0}
-    - target: {fileID: 4485846497185524934, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+    - target: {fileID: 4806443054234264473, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4925247525742968035, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222971075368349808, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222971075368349808, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+    - target: {fileID: 4806443054234264473, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6222971075368349808, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+    - target: {fileID: 4806443054234264473, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6222971075368349808, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+    - target: {fileID: 4806443054234264473, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6222971075368349808, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+    - target: {fileID: 4806443054234264473, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -260
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913903279037242588, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366935430369163957, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471665812089270901, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471665812089270901, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471665812089270901, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471665812089270901, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471665812089270901, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759204770252613499, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_Pivot.x
@@ -1210,23 +1232,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8455045061350108365, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8455045061350108365, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8455045061350108365, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8455045061350108365, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8455045061350108365, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579706611739413808, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032175814191655769, guid: 40a3527ece92d0f4da39d9d1414b8901, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1697,7 +1727,7 @@ AudioSource:
   m_GameObject: {fileID: 1531256972}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 867186300950076598, guid: 33cda888001de3848b5476b665ffd3ea, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1974,6 +2004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu.ToggleButton
   target: {fileID: 364714807}
+  deactivateOnLoad: 0
 --- !u!114 &1809678356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,7 +2249,7 @@ AudioSource:
   m_GameObject: {fileID: 1842848988}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 867186300950076598, guid: 33cda888001de3848b5476b665ffd3ea, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

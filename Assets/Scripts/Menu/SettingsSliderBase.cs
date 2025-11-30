@@ -15,13 +15,16 @@ namespace Menu
         protected abstract float Value { set; }
         protected abstract float DefaultValue { get; }
         protected abstract string Label { get; }
+        protected virtual float Display(float value) => value;
 
         private void Start()
         {
             var slider = GetComponent<Slider>();
-            UpdateText(slider.value = Value = PlayerPrefs.GetFloat(Label, DefaultValue));
+            UpdateText(slider.value = LoadValue());
             slider.onValueChanged.AddListener(Change);
         }
+
+        public float LoadValue() => Value = PlayerPrefs.GetFloat(Label, DefaultValue);
 
         private void Change(float value)
         {
@@ -30,7 +33,7 @@ namespace Menu
             UpdateText(value);
         }
 
-        private void UpdateText(float value) => text.text = $"{Label}: {value / DefaultValue:P0}";
+        private void UpdateText(float value) => text.text = $"{Label}: {Display(value):P0}";
 
     }
 

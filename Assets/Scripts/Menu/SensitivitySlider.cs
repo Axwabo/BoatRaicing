@@ -13,6 +13,8 @@
 
         protected override string Label => "Camera Sensitivity";
 
+        protected override float Display(float value) => value / CameraRotor.DefaultSensitivity;
+
     }
 
 }
