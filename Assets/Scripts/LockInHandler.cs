@@ -1,5 +1,6 @@
 ﻿using Maps;
 using Menu;
+using TMPro;
 using UnityEngine;
 
 public sealed class LockInHandler : MonoBehaviour
@@ -9,12 +10,15 @@ public sealed class LockInHandler : MonoBehaviour
 
     private AudioSource[] _sources;
 
+    private TextMeshProUGUI[] _text;
+
     private bool _isLocked;
 
     private void Awake()
     {
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _sources = GetComponentsInChildren<AudioSource>();
+        _text = GetComponentsInChildren<TextMeshProUGUI>();
     }
 
     private void LateUpdate()
@@ -27,6 +31,8 @@ public sealed class LockInHandler : MonoBehaviour
             meshRenderer.enabled = !_isLocked;
         foreach (var source in _sources)
             source.mute = _isLocked;
+        foreach (var text in _text)
+            text.enabled = !_isLocked;
     }
 
 }
