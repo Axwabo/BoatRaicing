@@ -8,7 +8,7 @@ namespace Maps
     public sealed class Starter : MonoBehaviour
     {
 
-        public const int Waiting = 10;
+        public const int Waiting = 5;
         public const int Countdown = 3;
 
         public static float TimeToStart { get; private set; }
