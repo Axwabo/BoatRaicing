@@ -10,6 +10,9 @@ namespace Maps
         [field: SerializeField]
         public Sprite Image { get; private set; }
 
+        [field: SerializeField]
+        public bool Laps { get; private set; }
+
     }
 
 }

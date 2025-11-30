@@ -9,6 +9,8 @@ namespace Maps
 
         public static Finish Current { get; private set; }
 
+        public static int RequiredLaps { get; set; } = 1;
+
         private int _qualified;
 
         private MeshRenderer _renderer;
@@ -26,7 +28,7 @@ namespace Maps
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent(out Boat _))
+            if (!other.TryGetComponent(out Boat boat) || ++boat.Laps < RequiredLaps)
                 return;
             _qualified++;
             if (!other.TryGetComponent(out ManualBoatControl _))

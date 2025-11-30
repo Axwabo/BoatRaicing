@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Screw.unity
     guid: 160611dcdbaaae24bb284eb4a0d12f6f
+  - enabled: 1
+    path: Assets/Scenes/Maps/Infinity.unity
+    guid: dabf98b9f81cf1740907ec22a39b7cfa
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

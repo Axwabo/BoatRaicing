@@ -28,6 +28,8 @@ public sealed class Boat : MonoBehaviour
 
     private float _leftAngle;
 
+    public int Laps { get; set; }
+
     [field: SerializeField]
     public MeshRenderer Player { get; private set; }
 

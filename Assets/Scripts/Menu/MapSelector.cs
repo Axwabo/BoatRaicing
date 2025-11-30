@@ -22,6 +22,7 @@ namespace Menu
         {
             image.sprite = descriptor.Image;
             text.text = descriptor.name;
+            Finish.RequiredLaps = descriptor.Laps ? 3 : 1;
         }
 
     }
