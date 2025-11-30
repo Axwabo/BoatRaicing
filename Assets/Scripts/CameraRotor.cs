@@ -6,7 +6,6 @@ public sealed class CameraRotor : MonoBehaviour
 {
 
     public const float DefaultSensitivity = 0.1f;
-    public const string SensitivityKey = "Sensitivity";
 
     public static float Sensitivity { get; set; } = DefaultSensitivity;
 
@@ -21,7 +20,6 @@ public sealed class CameraRotor : MonoBehaviour
     {
         _camera = transform;
         _player = _camera.parent;
-        Sensitivity = PlayerPrefs.GetFloat(SensitivityKey, DefaultSensitivity);
     }
 
     private void OnEnable() => Cursor.lockState = CursorLockMode.Locked;

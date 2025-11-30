@@ -1,32 +1,17 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Menu
+﻿namespace Menu
 {
 
-    [RequireComponent(typeof(Slider))]
-    public sealed class SensitivitySlider : MonoBehaviour
+    public sealed class SensitivitySlider : SettingsSliderBase
     {
 
-        [SerializeField]
-        private TextMeshProUGUI text;
-
-        private void Start()
+        protected override float Value
         {
-            var slider = GetComponent<Slider>();
-            UpdateText(slider.value = CameraRotor.Sensitivity);
-            slider.onValueChanged.AddListener(Change);
+            set => CameraRotor.Sensitivity = value;
         }
 
-        private void Change(float value)
-        {
-            CameraRotor.Sensitivity = value;
-            PlayerPrefs.SetFloat(CameraRotor.SensitivityKey, value);
-            UpdateText(value);
-        }
+        protected override float DefaultValue => CameraRotor.DefaultSensitivity;
 
-        private void UpdateText(float value) => text.text = $"Camera Sensitivity: {value / CameraRotor.DefaultSensitivity:P0}";
+        protected override string Label => "Camera Sensitivity";
 
     }
 
