@@ -19,7 +19,7 @@ namespace Menu
         private void Start()
         {
             var slider = GetComponent<Slider>();
-            UpdateText(slider.value = Value = PlayerPrefs.GetFloat(Label));
+            UpdateText(slider.value = Value = PlayerPrefs.GetFloat(Label, DefaultValue));
             slider.onValueChanged.AddListener(Change);
         }
 
