@@ -3,7 +3,7 @@
 namespace Maps
 {
 
-    [RequireComponent(typeof(MeshRenderer))]
+    [RequireComponent(typeof(MeshRenderer), typeof(AudioSource))]
     public sealed class Finish : MonoBehaviour
     {
 
@@ -13,9 +13,12 @@ namespace Maps
 
         private MeshRenderer _renderer;
 
+        private AudioSource _source;
+
         private void Awake()
         {
             _renderer = GetComponent<MeshRenderer>();
+            _source = GetComponent<AudioSource>();
             Current = this;
         }
 
@@ -26,8 +29,10 @@ namespace Maps
             if (!other.TryGetComponent(out Boat _))
                 return;
             _qualified++;
-            if (other.TryGetComponent(out ManualBoatControl _))
-                Timer.Current.Finish(_qualified);
+            if (!other.TryGetComponent(out ManualBoatControl _))
+                return;
+            _source.Play();
+            Timer.Current.Finish(_qualified);
         }
 
     }
