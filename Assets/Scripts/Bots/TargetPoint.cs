@@ -14,7 +14,7 @@ namespace Bots
         {
             var t = transform;
             Position = t.position;
-            Facing = t.TransformDirection(Vector3.forward);
+            Facing = t.TransformVector(Vector3.forward);
         }
 
         private void OnDrawGizmos()

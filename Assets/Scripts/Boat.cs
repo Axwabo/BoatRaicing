@@ -45,9 +45,7 @@ public sealed class Boat : MonoBehaviour
     [SerializeField]
     private Transform leftOar;
 
-    public float LinearVelocity => _rb.linearVelocity.MagnitudeIgnoreY();
-
-    public float AngularVelocity => _rb.angularVelocity.MagnitudeIgnoreY();
+    public Vector3 LinearVelocity => _rb.linearVelocity;
 
     private void Awake()
     {

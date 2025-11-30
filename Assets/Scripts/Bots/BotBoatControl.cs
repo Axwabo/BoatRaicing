@@ -17,6 +17,9 @@ namespace Bots
         [SerializeField]
         private float angleThreshold = 3;
 
+        [SerializeField]
+        private float distanceThreshold = 1;
+
         private void Awake()
         {
             _boat = GetComponent<Boat>();
@@ -42,19 +45,36 @@ namespace Bots
 
             var rowing = new Vector2();
             Row(angle, ref rowing);
-            rowing.y = 1;
+
             _boat.Row(rowing);
         }
 
         private void Row(float angle, ref Vector2 rowing)
         {
-            var angularVelocity = _boat.AngularVelocity;
-            if (angularVelocity > 0.0000004f)
-                return;
             if (angle < -angleThreshold)
                 rowing.x = 1;
             else if (angle > angleThreshold)
                 rowing.x = -1;
+        }
+
+        private float DistanceToFacing(TargetPoint target, Vector3 origin)
+        {
+            var targetPosition = target.Position + target.Facing;
+            var offset = targetPosition - origin;
+            var front = _t.TransformPoint(Vector3.forward * offset.MagnitudeIgnoreY());
+            return Vector3.Distance(targetPosition, front);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (_index >= Starter.TargetPoints.Count)
+                return;
+            Gizmos.color = Color.red;
+            var target = Starter.TargetPoints[_index];
+            var targetPosition = target.Position + target.Facing;
+            var offset = targetPosition - _t.position;
+            var front = _t.TransformPoint(Vector3.forward * offset.MagnitudeIgnoreY());
+            Gizmos.DrawSphere(front, 0.1f);
         }
 
     }
