@@ -17,7 +17,7 @@ public sealed class LockInHandler : MonoBehaviour
         _sources = GetComponentsInChildren<AudioSource>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         var locked = LockIn.Locked && Timer.QualifiedAt == 0;
         if (_isLocked == locked)

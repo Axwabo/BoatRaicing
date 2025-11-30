@@ -128,4 +128,19 @@ public sealed class Boat : MonoBehaviour
     private static bool Raycast(Vector3 position)
         => Physics.Raycast(position, Vector3.down, 0.1f, Walls);
 
+    public void Mount(Transform cam)
+    {
+        var playerTransform = Player.transform;
+        Player.enabled = false;
+        cam.parent = playerTransform;
+        cam.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        var camGo = cam.gameObject;
+        if (camGo.TryGetComponent(out CameraRotor rotor))
+            Destroy(rotor);
+        camGo.AddComponent<CameraRotor>();
+        playerTransform.localRotation = Quaternion.identity;
+    }
+
+    public void Unmount() => Player.enabled = true;
+
 }

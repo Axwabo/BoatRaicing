@@ -118,7 +118,7 @@ namespace Maps
 
         private void Prepare()
         {
-            ManualBoatControl.Current.Mount(cam);
+            ManualBoatControl.Current.Boat.Mount(cam);
             Finish.Current.Hide();
         }
 
