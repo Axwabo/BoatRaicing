@@ -10,9 +10,7 @@ namespace Menu
 
         private float _delay = 1;
 
-        private bool _aStarted;
-
-        private bool _bStarted;
+        private bool _isA;
 
         [SerializeField]
         private AudioSource a;
@@ -40,26 +38,19 @@ namespace Menu
             {
                 a.PlayOneShot(start);
                 b.clip = loop;
-                b.PlayDelayed(loopDelay);
+                b.PlayDelayed(loopDelay - 0.01f);
                 _started = true;
                 return;
             }
 
-            if (a.isPlaying)
-                _aStarted = false;
-            if (b.isPlaying)
-                _bStarted = false;
-            if (!_bStarted && a.clip && a.time >= loopTime - Time.deltaTime * 2)
-            {
-                b.PlayDelayed(loopTime - a.time - 0.01f);
-                _bStarted = true;
-            }
-            else if (!_aStarted && b.clip && b.time >= loopTime - Time.deltaTime * 2)
-            {
-                a.clip = loop;
-                a.PlayDelayed(loopTime - b.time - 0.01f);
-                _aStarted = true;
-            }
+            var source = _isA ? a : b;
+            if (source.time < loopTime - Time.deltaTime * 2)
+                return;
+            var other = _isA ? b : a;
+            other.clip = loop;
+            other.PlayDelayed(Mathf.Max(0, loopTime - source.time) - 0.01f);
+            _delay = 1;
+            _isA = !_isA;
         }
 
     }
