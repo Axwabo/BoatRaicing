@@ -10,6 +10,10 @@ namespace Menu
 
         private float _delay = 1;
 
+        private bool _aStarted;
+
+        private bool _bStarted;
+
         [SerializeField]
         private AudioSource a;
 
@@ -25,6 +29,9 @@ namespace Menu
         [SerializeField]
         private AudioClip loop;
 
+        [SerializeField]
+        private float loopTime;
+
         private void Update()
         {
             if ((_delay -= Time.deltaTime) > 0)
@@ -38,12 +45,20 @@ namespace Menu
                 return;
             }
 
-            if (a.clip && a.time >= a.clip.length - Time.deltaTime * 2)
-                b.Play();
-            else if (b.clip && b.time >= b.clip.length - Time.deltaTime * 2)
+            if (a.isPlaying)
+                _aStarted = false;
+            if (b.isPlaying)
+                _bStarted = false;
+            if (!_bStarted && a.clip && a.time >= loopTime - Time.deltaTime * 2)
+            {
+                b.PlayDelayed(loopTime - a.time - 0.01f);
+                _bStarted = true;
+            }
+            else if (!_aStarted && b.clip && b.time >= loopTime - Time.deltaTime * 2)
             {
                 a.clip = loop;
-                a.Play();
+                a.PlayDelayed(loopTime - b.time - 0.01f);
+                _aStarted = true;
             }
         }
 

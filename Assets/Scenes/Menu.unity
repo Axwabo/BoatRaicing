@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 705548953}
   - component: {fileID: 705548954}
   m_Layer: 0
-  m_Name: Music
+  m_Name: Menu Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1013,6 +1013,7 @@ MonoBehaviour:
   start: {fileID: 8300000, guid: 13f6a229e8493194ca2adad895e0ad95, type: 3}
   loopDelay: 0.48
   loop: {fileID: 8300000, guid: d45f5a993feee7341aa908bebd9811b8, type: 3}
+  loopTime: 32
 --- !u!114 &705548954
 MonoBehaviour:
   m_ObjectHideFlags: 0
