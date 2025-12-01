@@ -32,6 +32,7 @@ namespace Maps
         {
             if (!other.TryGetComponent(out Boat boat) || ++boat.Laps < RequiredLaps)
                 return;
+            boat.Laps = Mathf.Min(LapCount, boat.Laps);
             _qualified++;
             if (Timer.QualifiedAt != 0 || !other.TryGetComponent(out ManualBoatControl _))
                 return;
