@@ -33,7 +33,7 @@ namespace Maps
             if (!other.TryGetComponent(out Boat boat) || ++boat.Laps < RequiredLaps)
                 return;
             _qualified++;
-            if (!other.TryGetComponent(out ManualBoatControl _))
+            if (Timer.QualifiedAt != 0 || !other.TryGetComponent(out ManualBoatControl _))
                 return;
             _source.Play();
             Timer.Current.Finish(_qualified);
