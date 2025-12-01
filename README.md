@@ -97,3 +97,7 @@ External assets:
 - [Merry Sister](https://www.youtube.com/watch?v=z5b5Yp83YY0)
 
 The rest of the assets are provided by Unity.
+
+# Demo Video
+
+https://github.com/user-attachments/assets/843d7fbf-8585-4168-8d05-2c3401f117ee
