@@ -11,7 +11,7 @@ namespace Maps
 
         public static Finish Current { get; private set; }
 
-        public static int RequiredLaps { get; set; } = LapCount; // TODO: set back to 1
+        public static int RequiredLaps { get; set; } = 1;
 
         private int _qualified;
 
