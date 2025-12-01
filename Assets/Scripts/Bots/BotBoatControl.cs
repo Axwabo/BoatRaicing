@@ -79,7 +79,7 @@ namespace Bots
 
         private void CheckLap()
         {
-            if (_lap == _boat.Laps || _boat.Laps >= Finish.LapCount)
+            if (_lap == _boat.Laps || _boat.Laps >= Finish.RequiredLaps)
                 return;
             _lap = _boat.Laps;
             _index = 0;
